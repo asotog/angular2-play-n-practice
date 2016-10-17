@@ -1,0 +1,8 @@
+node_modules
+npm-debug.log
+typings
+src/static-assets/js/**/*.js
+src/static-assets/js/**/*.js.map
+
+src/static-assets/css/**/*.css
+src/static-assets/css/**/*.css.map
