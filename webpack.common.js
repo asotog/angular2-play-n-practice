@@ -12,7 +12,7 @@ module.exports = {
     },
     output: {
         path: jsFolder,
-        filename: '[name].js',
+        filename: '[name].bundle.js',
         chunkFilename: '[id].chunk.js'
     },
     plugins: [
@@ -22,10 +22,10 @@ module.exports = {
         new BrowserSyncPlugin({
             server: ['./src/pages', './src']
         }),
-        new ExtractTextPlugin('../css/[name].css') // path relative to entry js file
+        new ExtractTextPlugin('../css/[name].bundle.css') // path relative to entry js file which is loading the css
     ],
     resolve: {
-        extensions: ['', '.js', '.ts']
+        extensions: ['', '.ts', '.js']
     },
     
     devtool: 'source-map', // enable sourcemaps on dev
@@ -34,7 +34,7 @@ module.exports = {
         loaders: [
             {
                 test: /\.ts$/,
-                loaders: ['awesome-typescript-loader']
+                loaders: ['awesome-typescript-loader', 'angular2-template-loader']
             },
             {
                 test: /\.scss$/,
@@ -42,6 +42,10 @@ module.exports = {
                     'style', // The backup style loader
                     'css!sass!'
                 )
+            },
+            { 
+              test: /\.(html|css)$/, 
+              loader: 'raw-loader'
             }
         ]
     },
