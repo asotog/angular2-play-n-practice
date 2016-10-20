@@ -17,11 +17,11 @@ export class ContactComponent implements OnInit {
     
     ngOnInit() {}
     
-    showFieldErrors(field:NgModel) {
+    showFieldErrors(field:NgModel): boolean {
         return field.errors && (this.submitted || field.dirty || field.touched);
     }
     
-    submit(event:any, contactForm:NgForm) {
+    submit(event:any, contactForm:NgForm): void {
         event.preventDefault();
         this.submitted = true;
         if (contactForm.form.valid) {
