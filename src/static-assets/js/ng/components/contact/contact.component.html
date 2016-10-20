@@ -1,2 +1,53 @@
-
-<h1>Contact Component</h1>
+<form #contactForm="ngForm" (ngSubmit)="submit($event, contactForm)">
+  
+  <!-- EMAIL ADDRESS -->
+  <div class="form-group">
+    <label for="email">Email address</label>
+    <input [(ngModel)]="contact.email" #email="ngModel" name="email"
+        type="email" class="form-control"
+        id="email" aria-describedby="email" 
+        placeholder="Enter email" autocomplete="off" required
+        pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+    <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+    <!-- email field validation errors -->
+    <div class="field-errors" *ngIf="showFieldErrors(email)">
+        <div *ngIf="email.errors.required" class="field-error">This field is required</div>
+        <div *ngIf="email.errors.pattern" class="field-error">Invalid email format</div>
+    </div>
+  </div>
+  
+  <!-- USER REGION -->
+  <div class="form-group">
+    <label for="region">Region</label>
+    <select [(ngModel)]="contact.region" #region="ngModel" name="region" class="form-control" id="region" required>
+      <option value="">Choose Region</option>
+      <option value="americas">Americas</option>
+      <option value="europe">Europe</option>
+      <option value="asia">Asia</option>
+    </select>
+    <small *ngIf="region.value == 'europe'" class="form-text text-muted">
+      <label for="europePrivacy" class="form-check-label" 
+          [ngClass]="{'field-error-text': europePrivacy.errors && europePrivacy.errors.required}">
+        <input [(ngModel)]="contact.europePrivacy" 
+            #europePrivacy="ngModel" id="europePrivacy" 
+            name="europePrivacy" type="checkbox" class="form-check-input" 
+            required value="accepted"> Please accept privacy terms conditions.
+      </label>
+    </small>
+    <!-- user region field validation errors -->
+    <div class="field-errors" *ngIf="showFieldErrors(region)">
+        <div *ngIf="region.errors.required" class="field-error">This field is required</div>
+        <!-- <div *ngIf="email.errors.pattern" class="field-error">Invalid email format</div> -->
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label for="message">Write your contact message</label>
+    <textarea [(ngModel)]="contact.message" #message="ngModel" class="form-control" id="message" name="message" rows="3" required></textarea>
+    <div class="field-errors" *ngIf="showFieldErrors(message)">
+        <div *ngIf="message.errors.required" class="field-error">This field is required</div>
+    </div>
+  </div>
+  <button (click)="submit($event, contactForm)" class="btn btn-primary">Submit</button>
+  <!-- <button (click)="submit()" [disabled]="!contactForm.form.valid" type="submit" class="btn btn-primary">Submit</button> -->
+</form>

@@ -1,6 +1,19 @@
 
 $title-color: #3c86ad;
 
+$field-error-color: #ff9191;
+
 h1 {
     color: $title-color;
+}
+
+
+form {
+  .field-error {
+    font-size: 11px;
+  }
+  .field-error,
+  .field-error-text {
+    color: $field-error-color;
+  }
 }

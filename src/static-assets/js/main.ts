@@ -7,5 +7,11 @@ import { ContactModule } from './ng/modules/contact.module';
 if (process.env.ENV === 'production') {
     enableProdMode();
 }
-platformBrowserDynamic().bootstrapModule(AppModule);
-platformBrowserDynamic().bootstrapModule(ContactModule);
+
+if (document.querySelector('app')) {
+    platformBrowserDynamic().bootstrapModule(AppModule);
+}
+
+if (document.querySelector('contact')) {
+    platformBrowserDynamic().bootstrapModule(ContactModule);
+}
