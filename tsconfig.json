@@ -10,6 +10,9 @@
     "noImplicitAny": true,
     "suppressImplicitAnyIndexErrors": true
   },
+  "exclude": [
+    "node_modules"
+  ],
   "awesomeTypescriptLoaderOptions": {
     "useWebpackText": true
   }
