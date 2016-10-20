@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm, NgModel }  from '@angular/forms';
 
 import {Contact} from './contact';
+import {ContactService} from './contact.service';
 
 @Component({
     selector: 'contact',
@@ -13,7 +14,7 @@ export class ContactComponent implements OnInit {
     
     contact: Contact = {region: ''};
     
-    constructor() {  }
+    constructor(private contactService:ContactService) {  }
     
     ngOnInit() {}
     
@@ -25,7 +26,9 @@ export class ContactComponent implements OnInit {
         event.preventDefault();
         this.submitted = true;
         if (contactForm.form.valid) {
-            
+            this.contactService.submit(this.contact)
+                .subscribe(arg => alert(arg.message), 
+                    error => console.error(error));
         }
     }
 }
